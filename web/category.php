@@ -1,3 +1,8 @@
+<?php
+
+require_once 'data.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,50 +29,42 @@ header,
         <a href="/" title="Travel Blog">
             <img src="logo.png" alt="Logo" width="200"/>
         </a>
-        <menu>
-            <li>Home</li>
-            <li>Blog</li>
-            <li>Categories</li>
-        </menu>
+        <nav>
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="blog.php">Blog</a></li>
+                <ul><span>Categories</span>
+                    <?php foreach (catalogGetCategory() as $category) : ?>
+                        <li>
+                            <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </ul>
+        </nav>
     </header>
-
     <main>
         <section title="Posts">
-            <h1>Category 1</h1>
-            <div class="post-list">
+            <h1><?= $data['name'] ?></h1>
+            <?php foreach (catalogGetCategoryPost($data['category_id']) as $post) : ?>
                 <div class="post">
-                    <a href="/post-1-url" title="post 1">
-                        <img src="/post-placeholder.png" alt="post 1" width="200"/>
+                    <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>"><?= $post['name'] ?></a>
+                    <a href="/<?= $post['url'] ?>" title="<?= $post['name'] ?>">
+                        <img src="/post-placeholder.png" alt="<?= $post['name'] ?>" width="200"/>
                     </a>
-                    <a href="/post-1-url" title="post 1">post 1</a>
-                    <button type="button">Read more</button>
+                    <p><?= substr($post['description'], 0, 150) . '...' ?></p>
+                    <p><?= $post['author_name'] ?></p>
+                    <p><?= $post['publication_date']?></p>
+                    <a href="/<?= $post['url'] ?>">Read more</a>
                 </div>
-                <div class="post">
-                    <a href="/post-2-url" title="post 2">
-                        <img src="/post-placeholder.png" alt="post 2" width="200"/>
-                    </a>
-                    <a href="/post-2-url" title="post 2">post 2</a>
-                    <button type="button">Read more</button>
-                </div>
-                <div class="post">
-                    <a href="/post-3-url" title="post 3">
-                        <img src="/post-placeholder.png" alt="post 3" width="200"/>
-                    </a>
-                    <a href="/post-3-url" title="post 3">post 3</a>
-                    <button type="button">Read more</button>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </section>
     </main>
-
     <footer>
         <nav>
             <ul>
                 <li>
                     <a href="/about">About Us</a>
-                </li>
-                <li>
-                    <a href="/terms-and-conditions">Terms & Conditions</a>
                 </li>
                 <li>
                     <a href="/contact">Contact Us</a>

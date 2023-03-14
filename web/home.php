@@ -1,3 +1,9 @@
+<?php
+
+require_once 'data.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,11 +30,19 @@
     <a href="/" title="Travel Blog">
         <img src="logo.png" alt="Logo" width="200"/>
     </a>
-    <menu>
-        <li>Home</li>
-        <li>Blog</li>
-        <li>Categories</li>
-    </menu>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <ul><span>Categories</span>
+                <?php foreach (catalogGetCategory() as $category) : ?>
+                    <li>
+                        <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </ul>
+    </nav>
 </header>
 <main>
     <section title="Recently added posts">
@@ -62,10 +76,7 @@
     <nav>
         <ul>
             <li>
-                <a href="/about-us">About Us</a>
-            </li>
-            <li>
-                <a href="/terms-and-conditions">Terms & Conditions</a>
+                <a href="/about">About Us</a>
             </li>
             <li>
                 <a href="/contact">Contact Us</a>

@@ -1,3 +1,8 @@
+<?php
+
+require_once 'data.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +14,11 @@
         footer {
             border: 1px dashed black;
         }
+
         .post-list {
             display: flex;
         }
+
         .post-list .post {
             max-width: 30%;
         }
@@ -22,25 +29,33 @@
     <a href="/" title="Travel Blog">
         <img src="logo.png" alt="Logo" width="200"/>
     </a>
-    <menu>
-        <li>Home</li>
-        <li>Blog</li>
-        <li>Categories</li>
-    </menu>
+    <nav>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <ul><span>Categories</span>
+                <?php foreach (catalogGetCategory() as $category) : ?>
+                    <li>
+                        <a href="/<?= $category['url'] ?>"><?= $category['name'] ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </ul>
+    </nav>
 </header>
 <main>
-    <img src="post-placeholder.png" alt="post 1" width="300"/>
-    <h1>post 1</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi cumque dolore eos exercitationem, impedit laudantium minima minus molestias quaerat quam, quidem repellendus sit temporibus veniam veritatis.</p>
+    <h1><?= $data['name'] ?></h1>
+    <img src="post-placeholder.png" alt="<?= $data['name'] ?>" width="300"/>
+    <p><?= $data['description'] ?></p>
+    <p><?= $data['author_name'] ?></p>
+    <p><?= $data['publication_date']?></p>
 </main>
+
 <footer>
     <nav>
         <ul>
             <li>
                 <a href="/about">About Us</a>
-            </li>
-            <li>
-                <a href="/terms-and-conditions">Terms & Conditions</a>
             </li>
             <li>
                 <a href="/contact">Contact Us</a>
