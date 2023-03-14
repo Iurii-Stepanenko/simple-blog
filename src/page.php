@@ -1,6 +1,6 @@
 <?php
 
-require_once 'data.php';
+require_once '../src/data.php';
 
 ?>
 <!DOCTYPE html>
@@ -27,11 +27,11 @@ require_once 'data.php';
 <body>
 <header>
     <a href="/" title="Travel Blog">
-        <img src="logo.png" alt="Logo" width="200"/>
+        <img src="/logo.png" alt="Logo" width="200"/>
     </a>
     <nav>
         <ul>
-            <li><a href="/home">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/blog">Blog</a></li>
             <ul><span>Categories</span>
                 <?php foreach (catalogGetCategory() as $category) : ?>
@@ -43,12 +43,9 @@ require_once 'data.php';
         </ul>
     </nav>
 </header>
+
 <main>
-    <h1><?= $data['name'] ?></h1>
-    <img src="post-placeholder.png" alt="<?= $data['name'] ?>" width="300"/>
-    <p><?= $data['description'] ?></p>
-    <p><?= $data['author_name'] ?></p>
-    <p><?= $data['publication_date']?></p>
+    <?php require_once "../src/pages/$page" ?>
 </main>
 
 <footer>

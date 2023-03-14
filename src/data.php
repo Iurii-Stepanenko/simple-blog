@@ -152,3 +152,8 @@ function catalogGetPostByUrl(string $url): ?array
 
     return array_pop($data);
 }
+
+function blogGetNewPosts(): ?array
+{
+    return array_slice(catalogGetPost(), -3, 3, true);
+}
